@@ -91,7 +91,7 @@ class doctor_profilePage extends GetView<HomeController> {
                 ElevatedButton(onPressed: (){
                 Get.toNamed('/view_distance');
                   controller.getPolyline(doctor.latitude, doctor.longitude);
-
+                       print("dooooooooooooooooooooctor.latitude ${doctor.latitude}");
                 }, child: const Text('View Distance')),
                 ElevatedButton(onPressed: (){}, child: const Text('Book Now')),
               ],

@@ -15,7 +15,7 @@ class API_helper{
     if (response.statusCode == 200) {
       List data = json.decode(response.body);
       print(data);
-      return data.map((movie) => DoctorModel.fromJson(movie)).toList();
+      return data.map((doctor) => DoctorModel.fromJson(doctor)).toList();
     } else {
       print('Error: ${response.reasonPhrase}');
     }

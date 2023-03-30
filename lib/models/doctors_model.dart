@@ -1,6 +1,4 @@
 
-
-
 class DoctorModel {
   DoctorModel({
     required this.id,

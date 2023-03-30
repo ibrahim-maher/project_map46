@@ -12,6 +12,7 @@ class LocationHelper {
     return await Geolocator.getCurrentPosition();
   }
 
+
   Future<Position> determineUserLocation() async {
     bool serviceEnabled;
     LocationPermission permission;

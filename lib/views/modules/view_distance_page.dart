@@ -12,6 +12,16 @@ class ViewDistance extends GetView<HomeController> {
     return Scaffold(
       appBar: AppBar(
         title:const Text('View Distance'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back();
+            controller.polylineCoordinates.clear();
+            controller.polylines.clear();
+            controller.dis_markers.removeRange(1,controller.dis_markers.length);
+          },
+
+        )
       ),
       body: Stack(children: [
         GetBuilder(
@@ -23,6 +33,7 @@ class ViewDistance extends GetView<HomeController> {
             circles: controller.circles.toSet(),
             initialCameraPosition: controller.cameraPosition,
             polylines: controller.polylines.values.toSet(),
+            markers: controller.dis_markers.toSet(),
             onMapCreated: (GoogleMapController controller) {
               this.controller.googleMapController = controller;
             },

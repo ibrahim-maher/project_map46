@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/material.dart';
@@ -11,7 +9,9 @@ import 'package:project_map/helpers/API_helper.dart';
 import '../helpers/location_helper.dart';
 import '../views/componants/details_dailpg.dart';
 
+
 class HomeController extends GetxController {
+
   late GoogleMapController googleMapController; //controller for google map
   var  cameraPosition =const  CameraPosition(
     target: LatLng(30.033333, 31.233334),
@@ -20,6 +20,7 @@ class HomeController extends GetxController {
 
   Set<Circle> circles = HashSet<Circle>(); //circle on map
   final List<Marker> markers = <Marker>[]; // markers on map
+  final List<Marker> dis_markers = <Marker>[]; // markers on map
 
   late Position position; //user location
   List doctors = []; //list of doctors
@@ -32,6 +33,7 @@ class HomeController extends GetxController {
   PolylinePoints polylinePoints =
       PolylinePoints(); //instance of polyline points
   Map<PolylineId, Polyline> polylines = {}; //map of polyline id and polyline
+
   String googleAPiKey =
       "AIzaSyCyxe3h_ln3tcufkdQxnDIE9XYr2GxLwiw"; //google api key
 
@@ -55,6 +57,10 @@ class HomeController extends GetxController {
             target: LatLng(position.latitude, position.longitude), zoom: 12)));
 
     markers.add(Marker(
+        markerId: MarkerId(position.latitude.toString()),
+        infoWindow: InfoWindow(title: 'My Location'),
+        position: LatLng(position.latitude, position.longitude)));
+    dis_markers.add(Marker(
         markerId: MarkerId(position.latitude.toString()),
         infoWindow: InfoWindow(title: 'My Location'),
         position: LatLng(position.latitude, position.longitude)));
@@ -83,6 +89,18 @@ class HomeController extends GetxController {
     update();
   }
 
+  void addDisMarker(latLng, name, nameDepartment, price, id) {
+    dis_markers.add(Marker(
+      markerId: MarkerId(latLng.toString()),
+      icon: BitmapDescriptor.defaultMarkerWithHue(100),
+      position: latLng,
+      onTap: () {
+        Get.dialog(details_dialog(name, nameDepartment, price, id));
+      },
+    ));
+    update();
+  }
+
   //search doctors by name
 
   void searchDoctors(String value) {
@@ -98,7 +116,6 @@ class HomeController extends GetxController {
     }
     update();
   }
-
   //**********get polyline**********//
 
 //add  polyline
@@ -118,6 +135,7 @@ class HomeController extends GetxController {
           PointLatLng(position.latitude, position.longitude),
           PointLatLng(latitude, longitude),
           travelMode: TravelMode.driving);
+      print("resuuuuuuuuuuuuuuulrts ${result.points}");
       if (result.points.isNotEmpty) {
         result.points.forEach((PointLatLng point) {
           polylineCoordinates.add(LatLng(point.latitude, point.longitude));
