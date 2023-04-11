@@ -1,42 +1,29 @@
 
 import 'package:flutter/material.dart';
 
-class doctorCard extends StatelessWidget {
-  String name;
+class cliniclacard extends StatelessWidget {
 
   String? photo;
+  String clinicalName;
+  var nameDepartment;
 
-  var specialty;
+  cliniclacard({
+    required  this.clinicalName,
+    required this.nameDepartment,
+    this.photo,
 
-  var experience;
-
-   doctorCard({
-      this.photo,
-     required this.experience,
-     required this.specialty,
-     required this.name,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 100,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
+    return Card(
+      elevation: 4.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
       ),
       child: Padding(
-        padding: EdgeInsets.all(25.0),
+        padding: EdgeInsets.all(16.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -55,7 +42,7 @@ class doctorCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    name,
+                    clinicalName,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18.0,
@@ -63,20 +50,13 @@ class doctorCard extends StatelessWidget {
                   ),
                   SizedBox(height: 8.0),
                   Text(
-                    'Specialty: $specialty',
+                    'nameDepartment: $nameDepartment',
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 16.0,
                     ),
                   ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    'Experience:   $experience',
-                    style: TextStyle(
-                      color: Colors.grey[600],
-                      fontSize: 16.0,
-                    ),
-                  ),
+                
                 ],
               ),
             ),

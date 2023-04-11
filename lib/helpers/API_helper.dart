@@ -11,11 +11,10 @@ class API_helper{
 
     try{
 
-      var url = 'http://192.168.1.4:8000/api/DistanceBetweenCoordinate/$id'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.56:8000/api/DistanceBetweenCoordinate/$id'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
-      print("dddddddddddddddddddddobject");
 
       var response = await http.get(Uri.parse(url), headers: headers, );
       print("dddddddddddddddddddddobject");
@@ -41,7 +40,7 @@ class API_helper{
   getClinics(id ) async {
 
     try{
-      var url = 'http://192.168.1.4:8000/api/DistanceBetweenCoordinate/$id'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.56:8000/api/DistanceBetweenCoordinate/$id'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
@@ -72,7 +71,7 @@ class API_helper{
 
     try{
 
-      var url = 'http://192.168.1.4:8000/api/doctorAll/$name'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.56:8000/api/doctorAll/$name'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
@@ -97,7 +96,7 @@ class API_helper{
 
     try{
 
-      var url = 'http://192.168.1.4:8000/api/clinics/$name'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.56:8000/api/clinics/$name'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
