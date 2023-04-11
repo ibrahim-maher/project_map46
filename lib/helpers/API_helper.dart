@@ -11,7 +11,7 @@ class API_helper{
 
     try{
 
-      var url = 'http://192.168.1.4:8000/api/DistanceBetweenCoordinate/1'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.4:8000/api/DistanceBetweenCoordinate/$id'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
@@ -41,7 +41,7 @@ class API_helper{
   getClinics(id ) async {
 
     try{
-      var url = 'http://192.168.1.4:8000/api/DistanceBetweenCoordinate/1'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.4:8000/api/DistanceBetweenCoordinate/$id'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
@@ -72,7 +72,7 @@ class API_helper{
 
     try{
 
-      var url = 'http://192.168.1.4:8000/api/DistanceBetweenCoordinate/1'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.4:8000/api/doctorAll/$name'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
@@ -81,7 +81,6 @@ class API_helper{
 
         List data = json.decode(response.body);
         print(data);
-        print(data.map((doctor) => DoctorModel.fromJson(doctor)).toList());
         return data.map((doctor) => DoctorModel.fromJson(doctor)).toList();
       } else {
         print('Error: ${response.reasonPhrase}');
@@ -94,11 +93,11 @@ class API_helper{
 
   }
 
-  SearchForClinic(String name) async {
+  SearchForClinicals(String name) async {
 
     try{
 
-      var url = 'http://192.168.1.4:8000/api/DistanceBetweenCoordinate/1'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.4:8000/api/clinics/$name'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
@@ -106,8 +105,6 @@ class API_helper{
       if (response.statusCode == 200) {
 
         List data = json.decode(response.body);
-        print(data);
-        print(data.map((Clinic) => ClinicalModel.fromJson(Clinic)).toList());
         return data.map((Clinic) => ClinicalModel.fromJson(Clinic)).toList();
       } else {
         print('Error: ${response.reasonPhrase}');

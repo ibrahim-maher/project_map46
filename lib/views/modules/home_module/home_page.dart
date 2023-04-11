@@ -40,12 +40,11 @@ class homePage extends GetView<HomeController> {
               hintText: "Search",
               suffixIcon: Icon(Icons.search),
             ),
-            onChanged: (value) {
-              Get.toNamed('/search', arguments: value);
+           onTap: () {
+              Get.toNamed('/search_page');
             },
-          ),
         ),
-
+        ),
       ]),
       floatingActionButton: Container(
         margin: const EdgeInsets.only(right:40),

@@ -2,7 +2,6 @@
 import 'dart:convert';
 
 DistanceBetweenCoordinateModel distanceBetweenCoordinateModelFromJson(String str) => DistanceBetweenCoordinateModel.fromJson(json.decode(str));
-
 String distanceBetweenCoordinateModelToJson(DistanceBetweenCoordinateModel data) => json.encode(data.toJson());
 
 class DistanceBetweenCoordinateModel {
