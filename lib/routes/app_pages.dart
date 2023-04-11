@@ -1,6 +1,7 @@
 
 import 'package:get/get.dart';
 import '../views/modules/doctor_profile_module/doctor_profile_page.dart';
+import '../views/modules/doctor_profile_module/profile_binding.dart';
 import '../views/modules/home_module/home_bindings.dart';
 import '../views/modules/home_module/home_page.dart';
 import '../views/modules/search_module/search_bindings.dart';
@@ -22,9 +23,10 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.DOCTOR_PROFILE,
-      page: () => doctor_profilePage(),
+      page: () => const doctor_profilePage(),
       transition: Transition.leftToRightWithFade,
       opaque: false,
+      binding: DetailsBinding(),
       showCupertinoParallax: true,
     ),
     GetPage(

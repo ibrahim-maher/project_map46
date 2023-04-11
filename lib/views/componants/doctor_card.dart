@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class doctorCard extends StatelessWidget {
   String name;
@@ -7,10 +8,11 @@ class doctorCard extends StatelessWidget {
   String? photo;
 
   var specialty;
-
+int id;
   var experience;
 
    doctorCard({
+      required this.id,
       this.photo,
      required this.experience,
      required this.specialty,
@@ -20,26 +22,31 @@ class doctorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      height: 100,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(25.0),
+    return InkWell(
+      onTap: () {
+        Get.toNamed('/doctor_profile', arguments: id);
+      },
+      child: Container(
+        alignment: Alignment.center,
+        margin: const EdgeInsets.only(top: 20, left: 20, right: 10, bottom: 20),
+        width: 280,
+        height: 100,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(width: 16.0),
             ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.network(
@@ -53,6 +60,7 @@ class doctorCard extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     name,
@@ -61,7 +69,7 @@ class doctorCard extends StatelessWidget {
                       fontSize: 18.0,
                     ),
                   ),
-                  SizedBox(height: 8.0),
+                  SizedBox(height: 5.0),
                   Text(
                     'Specialty: $specialty',
                     style: TextStyle(
@@ -69,9 +77,9 @@ class doctorCard extends StatelessWidget {
                       fontSize: 16.0,
                     ),
                   ),
-                  SizedBox(height: 8.0),
+                  SizedBox(height: 5.0),
                   Text(
-                    'Experience:   $experience',
+                    'Experience:$experience' + ' years',
                     style: TextStyle(
                       color: Colors.grey[600],
                       fontSize: 16.0,

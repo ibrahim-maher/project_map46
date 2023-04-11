@@ -11,7 +11,7 @@ class API_helper{
 
     try{
 
-      var url = 'http://192.168.1.56:8000/api/DistanceBetweenCoordinate/$id'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.4:8000/api/DistanceBetweenCoordinate/$id'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
@@ -40,7 +40,7 @@ class API_helper{
   getClinics(id ) async {
 
     try{
-      var url = 'http://192.168.1.56:8000/api/DistanceBetweenCoordinate/$id'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.4:8000/api/DistanceBetweenCoordinate/$id'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
@@ -70,8 +70,7 @@ class API_helper{
   SearchForDoctor(String name) async {
 
     try{
-
-      var url = 'http://192.168.1.56:8000/api/doctorAll/$name'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.4:8000/api/doctorAll/$name'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
@@ -96,7 +95,7 @@ class API_helper{
 
     try{
 
-      var url = 'http://192.168.1.56:8000/api/clinics/$name'; // Replace with your phpMyAdmin URL
+      var url = 'http://192.168.1.4:8000/api/clinics/$name'; // Replace with your phpMyAdmin URL
       var headers = {
         'accept': 'application/json',
         'content-Type': 'application/json'};
@@ -116,5 +115,30 @@ class API_helper{
 
   }
 
+
+
+  getDoctor( id) async {
+
+    try{
+      var url = 'http://192.168.1.4:8000/api/doctor/$id'; // Replace with your phpMyAdmin URL
+      var headers = {
+        'accept': 'application/json',
+        'content-Type': 'application/json'};
+      var response = await http.get(Uri.parse(url), headers: headers, );
+      if (response.statusCode == 200) {
+
+        var data = json.decode(response.body);
+        print(data);
+        return data.map((doctor) => DoctorModel.fromJson(doctor)).toList();
+      } else {
+        print('Error: ${response.reasonPhrase}');
+      }
+    }
+    catch(e){
+      print(e);
+    }
+
+
+  }
 
 }
