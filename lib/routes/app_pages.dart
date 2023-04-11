@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../views/modules/doctor_profile_module/doctor_profile_page.dart';
 import '../views/modules/home_module/home_bindings.dart';
 import '../views/modules/home_module/home_page.dart';
+import '../views/modules/search_module/search_bindings.dart';
+import '../views/modules/search_module/search_page.dart';
 import '../views/modules/view_distance_page.dart';
 part './app_routes.dart';
 
@@ -28,7 +30,13 @@ abstract class AppPages {
     GetPage(
       name: Routes.VIEW_DISTANCE,
       page: () => ViewDistance(),
+    ),
 
+    GetPage(
+      name: Routes.Search_PAGE,
+      page: () => searchPage(),
+      binding: searchBinding(),
+      arguments: Get.arguments,
     ),
   ];
 }

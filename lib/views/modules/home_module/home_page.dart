@@ -41,7 +41,7 @@ class homePage extends GetView<HomeController> {
               suffixIcon: Icon(Icons.search),
             ),
             onChanged: (value) {
-              controller.searchDoctors(value);
+              Get.toNamed('/search', arguments: value);
             },
           ),
         ),

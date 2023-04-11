@@ -1,46 +1,62 @@
-// To parse this JSON data, do
-//
-//     final distanceBetweenCoordinateModel = distanceBetweenCoordinateModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-List<List<DistanceBetweenCoordinateModel>> distanceBetweenCoordinateModelFromJson(String str) => List<List<DistanceBetweenCoordinateModel>>.from(json.decode(str).map((x) => List<DistanceBetweenCoordinateModel>.from(x.map((x) => DistanceBetweenCoordinateModel.fromJson(x)))));
+DistanceBetweenCoordinateModel distanceBetweenCoordinateModelFromJson(String str) => DistanceBetweenCoordinateModel.fromJson(json.decode(str));
 
-String distanceBetweenCoordinateModelToJson(List<List<DistanceBetweenCoordinateModel>> data) => json.encode(List<dynamic>.from(data.map((x) => List<dynamic>.from(x.map((x) => x.toJson())))));
+String distanceBetweenCoordinateModelToJson(DistanceBetweenCoordinateModel data) => json.encode(data.toJson());
 
 class DistanceBetweenCoordinateModel {
   DistanceBetweenCoordinateModel({
-    required this.dName,
+    required this.doctors,
+    required this.clinics,
+  });
+
+  final List<Clinic> doctors;
+  final List<Clinic> clinics;
+
+  factory DistanceBetweenCoordinateModel.fromJson(Map<String, dynamic> json) => DistanceBetweenCoordinateModel(
+    doctors: List<Clinic>.from(json["doctors"].map((x) => Clinic.fromJson(x))),
+    clinics: List<Clinic>.from(json["clinics"].map((x) => Clinic.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "doctors": List<dynamic>.from(doctors.map((x) => x.toJson())),
+    "clinics": List<dynamic>.from(clinics.map((x) => x.toJson())),
+  };
+}
+
+class Clinic {
+  Clinic({
+    required this.clinicalName,
     required this.id,
     required this.latitude,
     required this.longitude,
     required this.distance,
-    required this.clinicalName,
+    required this.dName,
   });
 
-  final String dName;
+  final String clinicalName;
   final int id;
   final dynamic latitude;
   final dynamic longitude;
   final dynamic distance;
-  final String clinicalName;
+  final String dName;
 
-  factory DistanceBetweenCoordinateModel.fromJson(Map<String, dynamic> json) => DistanceBetweenCoordinateModel(
-    dName: json["DName"],
+  factory Clinic.fromJson(Map<String, dynamic> json) => Clinic(
+    clinicalName: json["Clinical_Name"],
     id: json["id"],
     latitude: json["latitude"],
     longitude: json["longitude"],
     distance: json["distance"],
-    clinicalName: json["Clinical_Name"],
+    dName: json["DName"],
   );
 
   Map<String, dynamic> toJson() => {
-    "DName": dName,
+    "Clinical_Name": clinicalName,
     "id": id,
     "latitude": latitude,
     "longitude": longitude,
     "distance": distance,
-    "Clinical_Name": clinicalName,
+    "DName": dName,
   };
 }

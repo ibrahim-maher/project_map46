@@ -1,52 +1,43 @@
 
 class DoctorModel {
   DoctorModel({
-    required this.id,
-    required this.name,
-    this.photo,
-    required this.photoNationalId,
-    required this.photoWorkPermit,
-    required this.photoDoctorsSyndicate,
-    required this.yearsExp,
-    required this.doctorSsn,
-    required this.description,
-    required this.phoneNumber,
-    required this.nameDepartment,
-    required this.age,
-    required this.gender,
-    required this.latitude,
-    required this.longitude,
-    required this.userId,
-    required this.servicePrice,
-    required this.acceptance,
-    required this.acceptanceEdit,
-    required this.status,
-    required this.createdAt,
-    required this.updatedAt,
+     required this.id,
+     this.name,
+     this.photo,
+     this.photoNationalId,
+     this.photoWorkPermit,
+     this.photoDoctorsSyndicate,
+     this.yearsExp,
+     this.doctorSsn,
+     this.description,
+     this.phoneNumber,
+     this.nameDepartment,
+     this.age,
+     this.gender,
+     this.latitude,
+     this.longitude,
+     this.userId,
+     this.servicePrice,
+
   });
 
   int id;
-  String name;
+  dynamic name;
   dynamic photo;
-  String photoNationalId;
-  String photoWorkPermit;
-  String photoDoctorsSyndicate;
-  int yearsExp;
-  int doctorSsn;
-  String description;
-  int phoneNumber;
-  String nameDepartment;
-  int age;
-  String gender;
-  double latitude;
-  double longitude;
-  int userId;
-  String servicePrice;
-  int acceptance;
-  int acceptanceEdit;
-  int status;
-  DateTime createdAt;
-  DateTime updatedAt;
+  dynamic photoNationalId;
+  dynamic photoWorkPermit;
+  dynamic photoDoctorsSyndicate;
+  dynamic yearsExp;
+  dynamic doctorSsn;
+  dynamic description;
+  dynamic phoneNumber;
+  dynamic nameDepartment;
+  dynamic age;
+  dynamic gender;
+  dynamic latitude;
+  dynamic longitude;
+  dynamic userId;
+  dynamic servicePrice;
 
   factory DoctorModel.fromJson(Map<String, dynamic> json) => DoctorModel(
     id: json["id"],
@@ -66,11 +57,7 @@ class DoctorModel {
     longitude: json["longitude"]?.toDouble(),
     userId: json["User_Id"],
     servicePrice: json["Service_Price"],
-    acceptance: json["Acceptance"],
-    acceptanceEdit: json["Acceptance_Edit"],
-    status: json["Status"],
-    createdAt: DateTime.parse(json["created_at"]),
-    updatedAt: DateTime.parse(json["updated_at"]),
+
   );
 
   Map<String, dynamic> toJson() => {
@@ -91,10 +78,6 @@ class DoctorModel {
     "longitude": longitude,
     "User_Id": userId,
     "Service_Price": servicePrice,
-    "Acceptance": acceptance,
-    "Acceptance_Edit": acceptanceEdit,
-    "Status": status,
-    "created_at": createdAt.toIso8601String(),
-    "updated_at": updatedAt.toIso8601String(),
+
   };
 }

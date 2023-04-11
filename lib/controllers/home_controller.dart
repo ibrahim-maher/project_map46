@@ -24,6 +24,7 @@ class HomeController extends GetxController {
 
   late Position position; //user location
   List doctors = []; //list of doctors
+  List clinics = []; //list of doctors
 
   LocationHelper locationHelper =
       LocationHelper(); // instance of  location helper
@@ -41,8 +42,22 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     //get doctors from api
-    api_helper.getDoctors().then((value) {
+    api_helper.getDoctors(1).then((value) {
+      print(value);
       doctors = value;
+      doctors.forEach((element) {
+        print(element.latitude);
+        addDoctorsMarker(LatLng(element.latitude, element.longitude), element.name, element.nameDepartment, element.servicePrice, element.id);
+      });
+      update();
+    });
+
+    api_helper.getClinics(1).then((value) {
+      clinics = value;
+      clinics.forEach((element) {
+        print(element.latitude);
+        addClinicalsMarker(LatLng(element.latitude, element.longitude), element.clinicalName, element.nameDepartment, element.servicePrice, element.id);
+        });
       update();
     });
   }
@@ -60,6 +75,7 @@ class HomeController extends GetxController {
         markerId: MarkerId(position.latitude.toString()),
         infoWindow: InfoWindow(title: 'My Location'),
         position: LatLng(position.latitude, position.longitude)));
+
     dis_markers.add(Marker(
         markerId: MarkerId(position.latitude.toString()),
         infoWindow: InfoWindow(title: 'My Location'),
@@ -77,10 +93,25 @@ class HomeController extends GetxController {
 
 
   //add marker on map
-  void addMarker(latLng, name, nameDepartment, price, id) {
+  void addDoctorsMarker(latLng, name, nameDepartment, price, id) {
     markers.add(Marker(
       markerId: MarkerId(latLng.toString()),
       icon: BitmapDescriptor.defaultMarkerWithHue(100),
+      position: latLng,
+      onTap: () {
+        Get.dialog(details_dialog(name,
+            nameDepartment,
+            price,
+            id));
+      },
+    ));
+    update();
+  }
+
+  void addClinicalsMarker(latLng, name, nameDepartment, price, id) {
+    markers.add(Marker(
+      markerId: MarkerId(latLng.toString()),
+      icon: BitmapDescriptor.defaultMarkerWithHue(200),
       position: latLng,
       onTap: () {
         Get.dialog(details_dialog(name, nameDepartment, price, id));
@@ -88,6 +119,8 @@ class HomeController extends GetxController {
     ));
     update();
   }
+
+
 
   void addDisMarker(latLng, name, nameDepartment, price, id) {
     dis_markers.add(Marker(
@@ -106,8 +139,8 @@ class HomeController extends GetxController {
   void searchDoctors(String value) {
     doctors.forEach((element) {
       if (element.name.toString().contains(value.toLowerCase())) {
-        addMarker(LatLng(element.latitude, element.longitude), element.name,
-            element.nameDepartment, element.servicePrice, element.id);
+        // addMarker(LatLng(element.latitude, element.longitude), element.name,
+        //     element.nameDepartment, element.servicePrice, element.id);
       }
     });
 
