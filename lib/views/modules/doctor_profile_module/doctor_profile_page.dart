@@ -15,26 +15,17 @@ class doctor_profilePage extends GetView<DetailsController> {
       body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: GetBuilder(
-            builder: (DetailsController controller) => controller.doctor==[] ? CircularProgressIndicator():Column(
+            builder: (DetailsController controller) => controller.loading != true ? Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      controller.doctor[0].name,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      ' ${controller.doctor[0].servicePrice}\$',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ],
+                Text(
+                  controller.doctor[0].name,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ),
+
                 Text(
                   controller.doctor[0].nameDepartment,
                   style: const TextStyle(fontSize: 20),
@@ -62,9 +53,11 @@ class doctor_profilePage extends GetView<DetailsController> {
                   controller.doctor[0].phoneNumber.toString(),
                   style: const TextStyle(fontSize: 20),
                 ),
-                ElevatedButton(onPressed: () {}, child: const Text('Book Now')),
+                ElevatedButton(onPressed: () {
+                  controller.bookAppointment(1);
+                }, child: const Text('Book Now')),
               ],
-            ),
+            ) :  Center(child: CircularProgressIndicator())
           )),
     );
   }

@@ -5,16 +5,10 @@ import 'package:get/get.dart';
 
 
 class details_dialog extends StatelessWidget {
-  var name;
-  var id;
-  var doctorID;
-  var Name_Department;
+  var work_days=[];
 
-   details_dialog({
-     required this.name,
-     required this.id,
-     this.Name_Department,
-     this.doctorID,
+  details_dialog({
+    required this.work_days,
     super.key,
   });
 
@@ -22,23 +16,22 @@ class details_dialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: AlertDialog(
-        title: Text(name,style: const TextStyle(
+        title: Text("name",style: const TextStyle(
           color: Colors.blue,
         ),),
-        content: Text(Name_Department == null ? "": Name_Department),
+        content: Text( ""),
         actions: [
           ElevatedButton(
               onPressed: () {
-                if (doctorID == null){
-                  Get.toNamed('/doctor_profile', arguments: id);
-                  print(id);
+                if (work_days == null){
+
                 }
                 else {
-                  Get.toNamed('/clinic_details', arguments: id);
+
                 }
 
               },
-              child: const Text('View Details')
+              child: const Text('book')
           ),
           const SizedBox(width: 70,),
           TextButton(

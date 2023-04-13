@@ -51,6 +51,7 @@ class homePage extends GetView<HomeController> {
         child: FloatingActionButton(
           onPressed: () async {
             controller.getMyCurrentLocation();
+            controller.onInit();
           },
           child: const Icon(Icons.place),
         ),

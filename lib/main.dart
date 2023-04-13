@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_map/routes/app_pages.dart';
 import 'package:project_map/views/modules/home_module/home_bindings.dart';
-import 'old_app/network/local/api_manger.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  DioHelper.init();
   runApp(const MyApp());
 }
 

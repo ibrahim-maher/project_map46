@@ -40,7 +40,7 @@ class DoctorModel {
   dynamic servicePrice;
 
   factory DoctorModel.fromJson(Map<String, dynamic> json) => DoctorModel(
-    id: json["id"],
+    id: json["doctor_id"],
     name: json["DName"],
     photo: json["Photo"],
     photoNationalId: json["Photo_National_ID"],
@@ -61,7 +61,7 @@ class DoctorModel {
   );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
+    "doctor_id": id,
     "DName": name,
     "Photo": photo,
     "Photo_National_ID": photoNationalId,

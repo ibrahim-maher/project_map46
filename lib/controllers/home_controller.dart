@@ -42,12 +42,13 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     //get doctors from api
+    markers.clear();
     api_helper.getDoctors(1).then((value) {
       print(value);
       doctors = value;
       doctors.forEach((element) {
         print(element.latitude);
-        addDoctorsMarker(LatLng(element.latitude, element.longitude), element.name, element.nameDepartment, element.servicePrice, element.id);
+        addDoctorsMarker(LatLng(element.latitude, element.longitude), element.name, element.servicePrice, element.id);
       });
       update();
     });
@@ -56,7 +57,7 @@ class HomeController extends GetxController {
       clinics = value;
       clinics.forEach((element) {
         print(element.latitude);
-        addClinicalsMarker(LatLng(element.latitude, element.longitude), element.clinicalName, element.nameDepartment, element.servicePrice, element.id);
+        addClinicalsMarker(LatLng(element.latitude, element.longitude), element.clinicalName, element.doctorId, element.servicePrice, element.id);
         });
       update();
     });
@@ -66,7 +67,7 @@ class HomeController extends GetxController {
   // get user current location
 
   Future getMyCurrentLocation() async {
-    position = await locationHelper.getUserCurrentLocation();
+    position = await locationHelper.getUserCurrentLocation(1);
     googleMapController.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
             target: LatLng(position.latitude, position.longitude), zoom: 12)));
@@ -93,28 +94,25 @@ class HomeController extends GetxController {
 
 
   //add marker on map
-  void addDoctorsMarker(latLng, name, nameDepartment, price, id) {
+  void addDoctorsMarker(latLng, name,  price, id) {
     markers.add(Marker(
       markerId: MarkerId(latLng.toString()),
       icon: BitmapDescriptor.defaultMarkerWithHue(100),
       position: latLng,
       onTap: () {
-        Get.dialog(details_dialog(name,
-            nameDepartment,
-            price,
-            id));
+        Get.dialog(details_dialog(name: name, id: id,));
       },
     ));
     update();
   }
 
-  void addClinicalsMarker(latLng, name, nameDepartment, price, id) {
+  void addClinicalsMarker(latLng, name, doctorId, price, id) {
     markers.add(Marker(
       markerId: MarkerId(latLng.toString()),
       icon: BitmapDescriptor.defaultMarkerWithHue(200),
       position: latLng,
       onTap: () {
-        Get.dialog(details_dialog(name, nameDepartment, price, id));
+        Get.dialog(details_dialog(name: name, id: id,doctorID: doctorId,));
       },
     ));
     update();
@@ -122,13 +120,13 @@ class HomeController extends GetxController {
 
 
 
-  void addDisMarker(latLng, name, nameDepartment, price, id) {
+  void addDisMarker(latLng, name, doctorId, price, id) {
     dis_markers.add(Marker(
       markerId: MarkerId(latLng.toString()),
       icon: BitmapDescriptor.defaultMarkerWithHue(100),
       position: latLng,
       onTap: () {
-        Get.dialog(details_dialog(name, nameDepartment, price, id));
+        Get.dialog(details_dialog(name: name, id: id,));
       },
     ));
     update();
