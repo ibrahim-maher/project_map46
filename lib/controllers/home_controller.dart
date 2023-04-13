@@ -48,7 +48,7 @@ class HomeController extends GetxController {
       doctors = value;
       doctors.forEach((element) {
         print(element.latitude);
-        addDoctorsMarker(LatLng(element.latitude, element.longitude), element.name, element.servicePrice, element.id);
+        addDoctorsMarker(LatLng(element.latitude, element.longitude), element.name, element.servicePrice, element.id, element.nameDepartment);
       });
       update();
     });
@@ -94,13 +94,13 @@ class HomeController extends GetxController {
 
 
   //add marker on map
-  void addDoctorsMarker(latLng, name,  price, id) {
+  void addDoctorsMarker(latLng, name,  price, id,Name_Department) {
     markers.add(Marker(
       markerId: MarkerId(latLng.toString()),
       icon: BitmapDescriptor.defaultMarkerWithHue(100),
       position: latLng,
       onTap: () {
-        Get.dialog(details_dialog(name: name, id: id,));
+        Get.dialog(details_dialog(name: name, id: id,Name_Department:Name_Department));
       },
     ));
     update();
